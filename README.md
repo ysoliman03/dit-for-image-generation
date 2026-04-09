@@ -11,7 +11,7 @@ A from-scratch implementation of a **Diffusion Transformer** trained on CIFAR-10
 
 ## What this is
 
-This project implements the full DiT (Diffusion Transformer) pipeline from the paper [*Scalable Diffusion Models with Transformers*](https://arxiv.org/abs/2212.09748) — every component written manually:
+This project implements the full DiT (Diffusion Transformer) pipeline from the paper [*Scalable Diffusion Models with Transformers*](https://arxiv.org/abs/2212.09748):
 
 - **Gaussian diffusion** with a linear noise schedule (DDPM)
 - **Transformer denoiser** with adaLN-Zero conditioning
@@ -33,7 +33,7 @@ This project implements the full DiT (Diffusion Transformer) pipeline from the p
 | DDPM (Ho et al. 2020) | ~35M | ~800K steps | 3.17 |
 | Improved DDPM (Nichol 2021) | 100M+ | ~800K steps | 2.90 |
 
-Our 16M model achieves **FID 22.18** trained for 200 epochs (~78K gradient steps) on a single Apple M-series GPU — roughly 4× fewer parameters and 10× fewer training steps than the published baselines. The gap is expected; closing it is purely a compute and scale question.
+Our 16M model achieves **FID 22.18** trained for 200 epochs (~78K gradient steps) on a single Apple M-series GPU, roughly 4× fewer parameters and 10× fewer training steps than the published baselines. The gap is expected; closing it is purely a compute and scale question.
 
 ### Loss curve
 
