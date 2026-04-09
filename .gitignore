@@ -1,0 +1,23 @@
+# Checkpoints — large binary files, not for version control
+checkpoints/
+checkpoints_small/
+checkpoints_large/
+checkpoints_run1/
+
+# Generated sample images
+samples/
+samples_small/
+samples_large/
+samples_run1/
+
+# CIFAR-10 dataset
+data/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+
+# macOS
+.DS_Store
