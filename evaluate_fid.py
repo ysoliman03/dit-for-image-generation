@@ -33,14 +33,16 @@ DEVICE = "cuda" if torch.cuda.is_available() else (
     "mps" if torch.backends.mps.is_available() else "cpu"
 )
 
-IMG_SIZE     = 32
-PATCH_SIZE   = 4
-IN_CHANNELS  = 3
-HIDDEN_SIZE  = 384
-NUM_HEADS    = 6
-DEPTH        = 6
-NUM_CLASSES  = 10
-TIMESTEPS    = 1000
+MODEL_CONFIGS = {
+    "small": dict(hidden_size=384, num_heads=6,  depth=6),
+    "large": dict(hidden_size=512, num_heads=8,  depth=12),
+}
+
+IMG_SIZE    = 32
+PATCH_SIZE  = 4
+IN_CHANNELS = 3
+NUM_CLASSES = 10
+TIMESTEPS   = 1000
 
 GUIDANCE_SCALE = 3.0
 DDIM_STEPS     = 100   # more steps → better quality for evaluation
@@ -208,6 +210,8 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--checkpoint", type=str, required=True,
                         help="Path to .pt checkpoint file")
+    parser.add_argument("--model", choices=["small", "large"], default="small",
+                        help="Model size preset matching the checkpoint (default: small)")
     parser.add_argument("--num_samples", type=int, default=10000,
                         help="Number of samples for FID (default: 10000)")
     args = parser.parse_args()
@@ -218,10 +222,10 @@ def main():
     # ── Load model ────────────────────────────────────────────────────────────
     print("\nLoading model…")
     ckpt = torch.load(args.checkpoint, map_location=DEVICE)
+    cfg  = MODEL_CONFIGS[args.model]
     model = DiT(
         img_size=IMG_SIZE, patch_size=PATCH_SIZE, in_channels=IN_CHANNELS,
-        hidden_size=HIDDEN_SIZE, num_heads=NUM_HEADS, depth=DEPTH,
-        num_classes=NUM_CLASSES,
+        num_classes=NUM_CLASSES, **cfg,
     ).to(DEVICE)
     model.load_state_dict(ckpt["model_state_dict"])
     ema = EMA(model)
