@@ -2,14 +2,16 @@
 
 A from-scratch implementation of a **Diffusion Transformer** trained on CIFAR-10, built entirely in PyTorch without any pretrained models or external diffusion libraries.
 
-![Samples at epoch 100 — large model](samples_large/samples_epoch0100.png)
+<img width="1444" height="1376" alt="image" src="https://github.com/user-attachments/assets/99bcec94-e903-412f-acf5-8b09cde39fbd" />
+
+
 *Class-conditional samples at epoch 100. Rows (top to bottom): plane, car, bird, cat, deer, dog, frog, horse, ship, truck.*
 
 ---
 
 ## What this is
 
-This project implements the full DiT (Diffusion Transformer) pipeline from the paper [*Scalable Diffusion Models with Transformers*](https://arxiv.org/abs/2212.09748) — every component written manually:
+This project implements the full DiT (Diffusion Transformer) pipeline from the paper [*Scalable Diffusion Models with Transformers*](https://arxiv.org/abs/2212.09748):
 
 - **Gaussian diffusion** with a linear noise schedule (DDPM)
 - **Transformer denoiser** with adaLN-Zero conditioning
